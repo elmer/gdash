@@ -38,6 +38,10 @@ class GraphiteGraph
     end
   end
 
+  def property(opts = {})
+    opts.each{|k,v| properties.store(k,v) unless properties.include?(k)}
+  end
+
   def method_missing(meth, *args)
     if properties.include?(meth)
       properties[meth] = args.first unless @overrides.include?(meth)
